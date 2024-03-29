@@ -18,8 +18,8 @@ public class PathTravelsalController {
         File f = new File(filepath);
         if (f.exists()) {
             byte[] data = Files.readAllBytes(Paths.get(filepath));
-            String s = new String(data);
-            return s;
+            String str = new String(data);
+            return str;
         }
         return filepath;
     }

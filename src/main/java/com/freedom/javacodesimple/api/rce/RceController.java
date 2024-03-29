@@ -37,6 +37,5 @@ public class RceController {
         new ProcessBuilder(cmds).start();
         return "";
     }
-    //        String[] cmds = new String[] {"open","-a","Calculator"};
-    //        new ProcessBuilder(cmds).start();
+
 }
