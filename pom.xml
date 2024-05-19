@@ -39,10 +39,11 @@
 			<type>pom</type>
 		</dependency>
 
+		<!-- CFGGenerator Dependency -->
 		<dependency>
-			<groupId>org.eclipse.jdt.core.compiler</groupId>
-			<artifactId>ecj</artifactId>
-			<version>4.6.1</version>
+			<groupId>org.jgrapht</groupId>
+			<artifactId>jgrapht-core</artifactId>
+			<version>1.5.1</version>
 		</dependency>
 
 
