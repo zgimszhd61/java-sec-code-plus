@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -17,37 +17,26 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
-		<!-- https://mvnrepository.com/artifact/org.redisson/redisson -->
-		<dependency>
-			<groupId>org.redisson</groupId>
-			<artifactId>redisson</artifactId>
-			<version>3.21.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.mvel</groupId>
-			<artifactId>mvel2</artifactId>
-			<version>2.4.7.Final</version>
-		</dependency>
-
-
-		<!-- https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-all -->
-		<dependency>
-			<groupId>org.codehaus.groovy</groupId>
-			<artifactId>groovy-all</artifactId>
-			<version>3.0.19</version>
-			<type>pom</type>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openjdk.nashorn</groupId>
-			<artifactId>nashorn-core</artifactId>
-			<version>15.3</version>
-		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sourceforge.pmd</groupId>
+			<artifactId>pmd-core</artifactId>
+			<version>7.0.0</version> <!-- 请根据需要选择具体的版本 -->
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.pmd</groupId>
+			<artifactId>pmd-java</artifactId>
+			<version>7.0.0</version> <!-- 请根据需要选择具体的版本 -->
+		</dependency>
+
+		<dependency>
+			<groupId>org.soot-oss</groupId>
+			<artifactId>soot</artifactId>
+			<version>4.5.0</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/ognl/ognl -->
@@ -71,20 +60,6 @@
 			<version>5.8.11</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.dom4j/dom4j -->
-		<dependency>
-			<groupId>org.dom4j</groupId>
-			<artifactId>dom4j</artifactId>
-			<version>2.1.1</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.jdom/jdom2 -->
-		<dependency>
-			<groupId>org.jdom</groupId>
-			<artifactId>jdom2</artifactId>
-			<version>2.0.6</version>
-		</dependency>
-
 
 
 	</dependencies>
@@ -105,10 +80,6 @@
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-		</repository>
-		<repository>
-			<id>central</id>
-			<url>https://repo.maven.apache.org/maven2/</url>
 		</repository>
 		<repository>
 			<id>spring-snapshots</id>
