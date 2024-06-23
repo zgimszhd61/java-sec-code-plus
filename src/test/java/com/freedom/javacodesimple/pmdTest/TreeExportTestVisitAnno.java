@@ -11,11 +11,12 @@ import net.sourceforge.pmd.lang.ast.Parser;
 import net.sourceforge.pmd.lang.ast.RootNode;
 import net.sourceforge.pmd.lang.ast.SemanticErrorReporter;
 import net.sourceforge.pmd.lang.document.TextDocument;
+import net.sourceforge.pmd.lang.java.ast.ASTAnnotation;
 import net.sourceforge.pmd.lang.java.ast.ASTCompilationUnit;
 import net.sourceforge.pmd.lang.java.ast.ASTMethodDeclaration;
 import net.sourceforge.pmd.lang.java.ast.JavaVisitorBase;
 
-public class TreeExportTestVisitFun {
+public class TreeExportTestVisitAnno {
     public static void main(String[] args) throws IOException {
         // 定义要读取的Java文件的路径
         String filePath = "/Users/a0000/mywork/mmjava/java-code-simple/src/main/java/com/freedom/javacodesimple/api/bsh/BshController.java";
@@ -41,19 +42,30 @@ public class TreeExportTestVisitFun {
             if (root instanceof ASTCompilationUnit) {
                 ASTCompilationUnit compilationUnit = (ASTCompilationUnit) root;
                 // 使用自定义的访问者遍历语法树
-                compilationUnit.acceptVisitor(new MethodSummaryVisitor(), null);
+                compilationUnit.acceptVisitor(new AnnotationVisitor(), null);
             }
         }
     }
 
-    // 自定义访问者类，用于访问方法声明节点
-    private static class MethodSummaryVisitor extends JavaVisitorBase<Object, Object> {
+    // 自定义访问者类，用于访问类、方法和注解节点
+    private static class AnnotationVisitor extends JavaVisitorBase<Object, Object> {
         @Override
         public Object visit(ASTMethodDeclaration node, Object data) {
             // 打印方法名称
             System.out.println("Method name: " + node.getName());
             // 打印方法参数
             System.out.println("Parameters: " + node.getFormalParameters());
+            // 打印方法上的注解
+            node.getDeclaredAnnotations().forEach(annotation -> {
+                System.out.println("Method Annotation: " + annotation);
+            });
+            return super.visit(node, data);
+        }
+
+        @Override
+        public Object visit(ASTAnnotation node, Object data) {
+            // 打印注解名称
+            System.out.println("Annotation: " + node);
             return super.visit(node, data);
         }
     }

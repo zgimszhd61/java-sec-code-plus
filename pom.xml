@@ -22,15 +22,59 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/net.sourceforge.pmd/pmd -->
 		<dependency>
 			<groupId>net.sourceforge.pmd</groupId>
-			<artifactId>pmd-core</artifactId>
-			<version>7.0.0</version> <!-- 请根据需要选择具体的版本 -->
+			<artifactId>pmd</artifactId>
+			<version>7.2.0</version>
+			<type>pom</type>
 		</dependency>
+
 		<dependency>
 			<groupId>net.sourceforge.pmd</groupId>
 			<artifactId>pmd-java</artifactId>
-			<version>7.0.0</version> <!-- 请根据需要选择具体的版本 -->
+			<version>7.2.0</version> <!-- 请根据需要选择具体的版本 -->
+		</dependency>
+
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.28.0-GA</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mvel</groupId>
+			<artifactId>mvel2</artifactId>
+			<version>2.5.2.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jdom</groupId>
+			<artifactId>jdom2</artifactId>
+			<version>2.0.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.11.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openjdk.nashorn</groupId>
+			<artifactId>nashorn-core</artifactId>
+			<version>15.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.redisson</groupId>
+			<artifactId>redisson</artifactId>
+			<version>3.30.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy</artifactId>
+			<version>3.0.9</version>
 		</dependency>
 
 		<!-- CFGGenerator Dependency -->
