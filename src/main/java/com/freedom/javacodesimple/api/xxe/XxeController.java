@@ -24,20 +24,20 @@ public class XxeController {
     //                    "]><doc>&xxe;</doc>"
 
     @GetMapping("/xxe/bad01")
-    public String xxe01(String xmlContent) throws IOException, ParserConfigurationException, SAXException {
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        DocumentBuilder db = dbf.newDocumentBuilder();
-        InputStream is = new ByteArrayInputStream(xmlContent.getBytes());
-        Document doc = db.parse(is);
+    public String processXmlUsingDom(String xmlContent) throws IOException, ParserConfigurationException, SAXException {
+        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+        InputStream xmlInputStream = new ByteArrayInputStream(xmlContent.getBytes());
+        Document document = documentBuilder.parse(xmlInputStream);
         return "success";
     }
 
     @GetMapping("/xxe/bad03")
-    public String xxe03(String xmlContent) throws IOException, ParserConfigurationException, SAXException {
-        SAXParserFactory factory  = SAXParserFactory.newInstance();
-        SAXParser saxparser = factory.newSAXParser();
-        SAXHandler handler = new SAXHandler();
-        saxparser.parse(xmlContent, handler);
+    public String processXmlUsingSax(String xmlContent) throws IOException, ParserConfigurationException, SAXException {
+        SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
+        SAXParser saxParser = saxParserFactory.newSAXParser();
+        SAXHandler saxHandler = new SAXHandler();
+        saxParser.parse(xmlContent, saxHandler);
         return "success";
     }
 

@@ -1,3 +1,4 @@
+
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ParseResult;
 import com.github.javaparser.ast.CompilationUnit;
@@ -7,10 +8,10 @@ import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 
-public class ASTTestSimple02 {
+public class ASTParserExample02 {
     public static void main(String[] args) {
         // 示例 Java 代码
-        String source =
+        String javaSourceCode =
                 "public class ComplexExample {\n" +
                         "    private int number;\n" +
                         "    \n" +
@@ -35,33 +36,34 @@ public class ASTTestSimple02 {
                         "}";
 
         // 解析源代码
-        ParseResult<CompilationUnit> parseResult = new JavaParser().parse(source);
-        if(parseResult.isSuccessful() && parseResult.getResult().isPresent()) {
-            CompilationUnit compilationUnit = parseResult.getResult().get();
+        ParseResult<CompilationUnit> compilationUnitResult = new JavaParser().parse(javaSourceCode);
+        if (compilationUnitResult.isSuccessful() && compilationUnitResult.getResult().isPresent()) {
+            CompilationUnit compilationUnit = compilationUnitResult.getResult().get();
+            
             // 打印 AST 结构
             System.out.println("Classes:");
-            compilationUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(classOrInterface -> {
-                System.out.println("  Class name: " + classOrInterface.getName());
+            compilationUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(classDeclaration -> {
+                System.out.println("  Class name: " + classDeclaration.getName());
             });
 
             System.out.println("\nFields:");
-            compilationUnit.findAll(FieldDeclaration.class).forEach(field -> {
-                System.out.println("  Field: " + field.getVariables().get(0).getName() + ", Type: " + field.getElementType());
+            compilationUnit.findAll(FieldDeclaration.class).forEach(fieldDeclaration -> {
+                System.out.println("  Field: " + fieldDeclaration.getVariables().get(0).getName() + ", Type: " + fieldDeclaration.getElementType());
             });
 
             System.out.println("\nConstructors:");
-            compilationUnit.findAll(ConstructorDeclaration.class).forEach(constructor -> {
-                System.out.println("  Constructor name: " + constructor.getName());
+            compilationUnit.findAll(ConstructorDeclaration.class).forEach(constructorDeclaration -> {
+                System.out.println("  Constructor name: " + constructorDeclaration.getName());
             });
 
             System.out.println("\nMethods:");
-            compilationUnit.findAll(MethodDeclaration.class).forEach(method -> {
-                System.out.println("  Method name: " + method.getName() + ", Return type: " + method.getType());
+            compilationUnit.findAll(MethodDeclaration.class).forEach(methodDeclaration -> {
+                System.out.println("  Method name: " + methodDeclaration.getName() + ", Return type: " + methodDeclaration.getType());
             });
 
             System.out.println("\nMethod Calls:");
-            compilationUnit.findAll(MethodCallExpr.class).forEach(methodCall -> {
-                System.out.println("  Method call: " + methodCall.getName() + ", Arguments: " + methodCall.getArguments());
+            compilationUnit.findAll(MethodCallExpr.class).forEach(methodCallExpression -> {
+                System.out.println("  Method call: " + methodCallExpression.getName() + ", Arguments: " + methodCallExpression.getArguments());
             });
         }
     }

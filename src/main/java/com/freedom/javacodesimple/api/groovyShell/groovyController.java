@@ -14,42 +14,42 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-public class groovyController {
+public class GroovyController {
     @GetMapping("/groovy/bad01")
-    public String groovy01(String payload) {
-        GroovyScriptEvaluator gse = new GroovyScriptEvaluator();
-        ScriptSource scriptSource = new StaticScriptSource(payload);//关键用户输入
-//        ScriptSource scriptSource = new StaticScriptSource("\"open -a Calculator\".execute().text");//关键用户输入
-        gse.evaluate(scriptSource);
+    public String executeGroovyScriptWithEvaluator(String groovyScript) {
+        GroovyScriptEvaluator scriptEvaluator = new GroovyScriptEvaluator();
+        ScriptSource scriptSource = new StaticScriptSource(groovyScript); // 关键用户输入
+//        ScriptSource scriptSource = new StaticScriptSource("\"open -a Calculator\".execute().text"); // 关键用户输入
+        scriptEvaluator.evaluate(scriptSource);
         return  "{'msg':'false'}";
     }
 
     @GetMapping("/groovy/bad02")
-    public String groovy02(String script) throws InstantiationException, IllegalAccessException {
-        final GroovyClassLoader classLoader = new GroovyClassLoader();
-        Class groovy = classLoader.parseClass(script);
-        GroovyObject groovyObj = (GroovyObject) groovy.newInstance();
+    public String executeGroovyScriptWithClassLoader(String groovyScript) throws InstantiationException, IllegalAccessException {
+        final GroovyClassLoader groovyClassLoader = new GroovyClassLoader();
+        Class parsedClass = groovyClassLoader.parseClass(groovyScript);
+        GroovyObject groovyObject = (GroovyObject) parsedClass.newInstance();
         return  "{'msg':'false'}";
     }
 
     @GetMapping("/groovy/bad03")
-    public String groovy03(String script){
-        Eval.me(script);
+    public String executeGroovyScriptWithEval(String groovyScript){
+        Eval.me(groovyScript);
         return  "{'msg':'false'}";
     }
 
     @GetMapping("/groovy/bad04")
-    public String groovy04(String script){
-        GroovyShell shell = new GroovyShell();
-        shell.evaluate(script);
+    public String executeGroovyScriptWithShell(String groovyScript){
+        GroovyShell groovyShell = new GroovyShell();
+        groovyShell.evaluate(groovyScript);
         return  "{'msg':'false'}";
     }
 
     @GetMapping("/groovy/bad05")
-    public String groovy05(String script){
-        GroovyShell shell = new GroovyShell();
-        GroovyCodeSource gcs = new GroovyCodeSource(script, "test", "Test");
-        shell.evaluate(gcs);
+    public String executeGroovyScriptWithCodeSource(String groovyScript){
+        GroovyShell groovyShell = new GroovyShell();
+        GroovyCodeSource codeSource = new GroovyCodeSource(groovyScript, "test", "Test");
+        groovyShell.evaluate(codeSource);
         return  "{'msg':'false'}";
     }
 

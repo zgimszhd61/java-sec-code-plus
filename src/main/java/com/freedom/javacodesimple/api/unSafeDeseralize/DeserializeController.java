@@ -14,10 +14,10 @@ import java.nio.charset.StandardCharsets;
 @RequestMapping("/api")
 public class DeserializeController {
     @GetMapping("/deserialize/bad01")
-    public String Deserialize01(String payload) throws OgnlException, IOException, ClassNotFoundException {
-        ByteArrayInputStream bais = new ByteArrayInputStream(payload.getBytes(StandardCharsets.UTF_8));
-        ObjectInputStream ois = new ObjectInputStream(bais);
-        Object obj = (Object) ois.readObject();
+    public String deserializePayload(String serializedData) throws OgnlException, IOException, ClassNotFoundException {
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(serializedData.getBytes(StandardCharsets.UTF_8));
+        ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
+        Object deserializedObject = objectInputStream.readObject();
         return  "{'msg':'false'}";
     }
 }

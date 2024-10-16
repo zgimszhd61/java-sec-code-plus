@@ -10,10 +10,9 @@ import java.io.IOException;
 @RequestMapping("/api")
 public class ReDoSController {
     @GetMapping("/redos/bad01")
-    public boolean redos01(String regex,String input) throws IOException {
+    public boolean redos01(String regularExpression, String userInput) throws IOException {
 
         // BAD: Unsanitized user input is used to construct a regular expression
-        return input.matches(regex);
+        return userInput.matches(regularExpression);
     }
-
 }

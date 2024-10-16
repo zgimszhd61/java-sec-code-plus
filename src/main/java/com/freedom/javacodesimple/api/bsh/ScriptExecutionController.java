@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-public class BshController {
-    @GetMapping("/bsh/bad01")
-    public String bsh01(String payload) throws OgnlException {
-        BshScriptEvaluator evaluator = new BshScriptEvaluator();
+public class ScriptExecutionController {
+    @GetMapping("/bsh/evaluateScript")
+    public String evaluateBshScript(String scriptPayload) throws OgnlException {
+        BshScriptEvaluator scriptEvaluator = new BshScriptEvaluator();
 //        String script = "java.lang.Runtime.getRuntime().exec(\"/System/Applications/Calculator.app/Contents/MacOS/Calculator\");";//ok
-        evaluator.evaluate(new StaticScriptSource(payload));//重要.
+        scriptEvaluator.evaluate(new StaticScriptSource(scriptPayload));//重要.
         return  "{'msg':'false'}";
     }
 }

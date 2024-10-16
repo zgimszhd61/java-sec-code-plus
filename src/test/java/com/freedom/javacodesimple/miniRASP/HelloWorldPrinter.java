@@ -7,12 +7,12 @@ import javassist.CtMethod;
 import javassist.expr.ExprEditor;
 import javassist.expr.MethodCall;
 
-public class onTestprint {
-    public void testMethod() {
+public class HelloWorldPrinter {
+    public void printHelloWorld() {
         System.out.println("Hello, World!");
     }
 
     public static void main(String[] args) {
-        new onTestprint().testMethod();
+        new HelloWorldPrinter().printHelloWorld();
     }
 }

@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class HardCodeController {
     @GetMapping("/hardPassword/bad01")
-    public String hardPassword01(){
-        String SECRET_PASSWORD = "letMeIn!";
-        String accessKeyId = "letMeIn!";
-        String accessKeySecret = "letMeIn!";
+    public String retrieveHardCodedPassword(){
+        String secretPassword = "letMeIn!";
+        String apiAccessKeyId = "letMeIn!";
+        String apiAccessKeySecret = "letMeIn!";
         return  "{'msg':'success'}";
     }
 }

@@ -1,8 +1,6 @@
 package com.freedom.javacodesimple.api.mvel;
 
-
 import cn.hutool.extra.expression.engine.mvel.MvelEngine;
-import ognl.Ognl;
 import ognl.OgnlException;
 import org.mvel2.MVEL;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,18 +9,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-public class mvelController {
+public class MvelController {
     @GetMapping("/mvel/bad01")
-    public String mvel01(String payload) throws OgnlException {
-        MvelEngine me = new MvelEngine();
-//        me.eval("Runtime.getRuntime().exec(\"open -a Calculator\")",null);
-        me.eval(payload,null);
+    public String executeMvelWithPayload(String mvelPayload) throws OgnlException {
+        MvelEngine mvelEngine = new MvelEngine();
+//        mvelEngine.eval("Runtime.getRuntime().exec(\"open -a Calculator\")", null);
+        mvelEngine.eval(mvelPayload, null);
         return  "{'msg':'false'}";
     }
 
     @GetMapping("/mvel/bad02")
-    public String mvel02(String payload) throws OgnlException {
-        MVEL.eval(payload);
+    public String executeMvelDirectly(String mvelPayload) throws OgnlException {
+        MVEL.eval(mvelPayload);
         return  "{'msg':'false'}";
     }
 }

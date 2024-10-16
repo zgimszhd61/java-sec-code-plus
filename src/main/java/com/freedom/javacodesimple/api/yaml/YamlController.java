@@ -17,20 +17,20 @@ import java.io.InputStream;
 @RestController
 @RequestMapping("/api")
 public class YamlController {
-    @GetMapping("/yaml/bad01")
-    public String yaml01(String payload) throws IOException, ParserConfigurationException, SAXException {
-//        String malicious = "!!javax.script.ScriptEngineManager [!!java.net.URLClassLoader "  + "[[!!java.net.URL [\"http://localhost\"]]]]";
-        Yaml yaml = new Yaml();
-//        Object obj = yaml.load(malicious);
-        Object obj = yaml.loadAs(payload,null);
+    @GetMapping("/yaml/processPayload01")
+    public String processYamlPayloadV1(String yamlPayload) throws IOException, ParserConfigurationException, SAXException {
+//        String maliciousYaml = "!!javax.script.ScriptEngineManager [!!java.net.URLClassLoader "  + "[[!!java.net.URL [\"http://localhost\"]]]";
+        Yaml yamlParser = new Yaml();
+//        Object loadedObject = yamlParser.load(maliciousYaml);
+        Object loadedObject = yamlParser.loadAs(yamlPayload, null);
         return "success";
     }
 
-    @GetMapping("/yaml/bad02")
-    public String yaml02(String payload) throws IOException, ParserConfigurationException, SAXException {
-//        String malicious = "!!javax.script.ScriptEngineManager [!!java.net.URLClassLoader "  + "[[!!java.net.URL [\"http://localhost\"]]]]";
-        Yaml yaml = new Yaml();
-        Object obj = yaml.load(payload);
+    @GetMapping("/yaml/processPayload02")
+    public String processYamlPayloadV2(String yamlPayload) throws IOException, ParserConfigurationException, SAXException {
+//        String maliciousYaml = "!!javax.script.ScriptEngineManager [!!java.net.URLClassLoader "  + "[[!!java.net.URL [\"http://localhost\"]]]";
+        Yaml yamlParser = new Yaml();
+        Object loadedObject = yamlParser.load(yamlPayload);
         return "success";
     }
 }

@@ -7,45 +7,46 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 
 // 如何将java代码转化为抽象语法树（Abstract Syntax Tree, AST）？请提供一个具体而简单的例子
 
-public class ASTTestSimple01 {
+public class ASTParserExample01 {
     public static void main(String[] args) {
-        String code = "public class HelloWorld { "
+        String sourceCode = "public class HelloWorld { "
                 + "public static void main(String[] args) { "
                 + "System.out.println(\"Hello, World!\"); "
                 + "} "
                 + "}";
 
         // 解析源代码
-        ParseResult<CompilationUnit> parseResult = new JavaParser().parse(code);
+        ParseResult<CompilationUnit> parsingResult = new JavaParser().parse(sourceCode);
 
-        if(parseResult.isSuccessful() && parseResult.getResult().isPresent()) {
-            CompilationUnit compilationUnit = parseResult.getResult().get();
+        if(parsingResult.isSuccessful() && parsingResult.getResult().isPresent()) {
+            CompilationUnit astRoot = parsingResult.getResult().get();
 
             // 打印AST
-            System.out.println(compilationUnit.toString());
+            System.out.println(astRoot.toString());
 
             // 遍历AST并输出方法名称
-            compilationUnit.accept(new MethodVisitor(), null);
+            astRoot.accept(new MethodNamePrinter(), null);
 
-            // 打印 AST
-            compilationUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(classOrInterface -> {
+            // 打印类名
+            astRoot.findAll(ClassOrInterfaceDeclaration.class).forEach(classOrInterface -> {
                 System.out.println("Class name: " + classOrInterface.getName());
             });
 
-            compilationUnit.findAll(MethodDeclaration.class).forEach(method -> {
+            // 打印方法名
+            astRoot.findAll(MethodDeclaration.class).forEach(method -> {
                 System.out.println("Method name: " + method.getName());
             });
         } else {
-            System.out.println("解析失败");
+            System.out.println("Parsing failed");
         }
     }
 
     // 访问者类，用于遍历AST中的方法声明
-    private static class MethodVisitor extends VoidVisitorAdapter<Void> {
+    private static class MethodNamePrinter extends VoidVisitorAdapter<Void> {
         @Override
-        public void visit(MethodDeclaration md, Void arg) {
-            super.visit(md, arg);
-            System.out.println("方法名称: " + md.getName());
+        public void visit(MethodDeclaration methodDeclaration, Void arg) {
+            super.visit(methodDeclaration, arg);
+            System.out.println("Method name: " + methodDeclaration.getName());
         }
     }
 }

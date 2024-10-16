@@ -16,20 +16,19 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/api")
 public class ScriptEngineController {
-    @GetMapping("/scriptengine/bad01")
-    public String scriptengine01(String payload) throws ScriptException {
+    @GetMapping("/scriptengine/execute01")
+    public String executeScriptWithEngineManager(String scriptPayload) throws ScriptException {
         ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
-        ScriptEngine nashorn = scriptEngineManager.getEngineByName("nashorn");
-        //        nashorn.eval("var x=new java.lang.ProcessBuilder; x.command(\"/System/Applications/Calculator.app/Contents/MacOS/Calculator\"); print(x.start());");
-        nashorn.eval(payload);
+        ScriptEngine nashornScriptEngine = scriptEngineManager.getEngineByName("nashorn");
+        nashornScriptEngine.eval(scriptPayload);
         return "success";
     }
 
-    @GetMapping("/scriptengine/bad02")
-    public String scriptengine02(String payload) throws  ScriptException {
-        NashornScriptEngineFactory factory = new NashornScriptEngineFactory();
-        NashornScriptEngine engine = (NashornScriptEngine) factory.getScriptEngine(new String[] { "-scripting"});
-        Object result = engine.eval(payload);
+    @GetMapping("/scriptengine/execute02")
+    public String executeScriptWithEngineFactory(String scriptPayload) throws ScriptException {
+        NashornScriptEngineFactory scriptEngineFactory = new NashornScriptEngineFactory();
+        NashornScriptEngine nashornScriptEngine = (NashornScriptEngine) scriptEngineFactory.getScriptEngine(new String[]{"-scripting"});
+        Object scriptResult = nashornScriptEngine.eval(scriptPayload);
         return "success";
     }
 }

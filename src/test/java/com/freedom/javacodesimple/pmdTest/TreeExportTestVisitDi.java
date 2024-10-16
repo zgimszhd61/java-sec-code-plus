@@ -20,7 +20,7 @@ import net.sourceforge.pmd.lang.java.ast.JavaVisitorBase;
 public class TreeExportTestVisitDi {
     public static void main(String[] args) throws IOException {
         // 指定要解析的Java文件路径
-        String filePath = "/Users/a0000/mywork/mmjava/java-code-simple/src/main/java/com/freedom/javacodesimple/api/bsh/BshController.java";
+        String filePath = "src/main/java/com/freedom/javacodesimple/api/bsh/BshController.java";
         // 读取文件内容
         String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
 

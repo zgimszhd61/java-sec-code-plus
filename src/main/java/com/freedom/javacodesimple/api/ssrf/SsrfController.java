@@ -12,23 +12,22 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-
 // https://github.com/proudwind/javasec_study/blob/master/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-ssrf.md
 @RestController
 @RequestMapping("/api")
 public class SsrfController {
     @GetMapping("/ssrf/bad01")
-    public String ssrf01(String imageUrl) throws IOException {
-        URL url = new URL(imageUrl);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("GET");
+    public String fetchRemoteImage(String imageUrl) throws IOException {
+        URL remoteUrl = new URL(imageUrl);
+        HttpURLConnection httpConnection = (HttpURLConnection) remoteUrl.openConnection();
+        httpConnection.setRequestMethod("GET");
 
-        return connection.getResponseMessage();
+        return httpConnection.getResponseMessage();
     }
+
     @GetMapping("/ssrf/bad02")
-    public String ssrf02(String imageUrl) throws IOException {
-        BufferedImage img = ImageIO.read(new File(imageUrl));
-        return "yes";
+    public String loadImageFromFile(String filePath) throws IOException {
+        BufferedImage image = ImageIO.read(new File(filePath));
+        return "Image Loaded Successfully";
     }
-
 }

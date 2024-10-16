@@ -15,76 +15,78 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/api")
 public class SpelController {
-    private static final ExpressionParser PARSER = new SpelExpressionParser();
+    private static final ExpressionParser expressionParser = new SpelExpressionParser();
+
     @GetMapping("/spel/bad01")
-    public String spel01(String cmd) {
-        SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
-        Expression expression = spelExpressionParser.parseExpression(cmd);
-        String out = (String) expression.getValue();
+    public String executeSpel01(String userInput) {
+        SpelExpressionParser spelParser = new SpelExpressionParser();
+        Expression parsedExpression = spelParser.parseExpression(userInput);
+        String result = (String) parsedExpression.getValue();
         return "success";
     }
 
     @GetMapping("/spel/bad02")
-    public String spel02(String cmd) {
-//        String script = "T(java.lang.Runtime).getRuntime().exec('open -a Calculator')";
-        SpelExpressionParser parser = new SpelExpressionParser();
-        SpelExpression expr = parser.parseRaw(cmd);
-        expr.getValue();
+    public String executeSpel02(String userInput) {
+        SpelExpressionParser spelParser = new SpelExpressionParser();
+        SpelExpression parsedExpression = spelParser.parseRaw(userInput);
+        parsedExpression.getValue();
         return "success";
     }
 
     @GetMapping("/spel/bad03")
-    public String spel03(String cmd) {
+    public String executeSpel03(String userInput) {
         ExpressionParser parser = new SpelExpressionParser();
-        Expression expression = parser.parseExpression(cmd);
-        expression.getValue(); // $hasSpelInjection
+        Expression parsedExpression = parser.parseExpression(userInput);
+        parsedExpression.getValue(); // $hasSpelInjection
         return "success";
     }
 
     @GetMapping("/spel/bad04")
-    public String spel04(String cmd) {
-        Expression expression = new SpelExpressionParser().parseExpression(cmd);
-        expression.getValue(); // $hasSpelInjection
+    public String executeSpel04(String userInput) {
+        Expression parsedExpression = new SpelExpressionParser().parseExpression(userInput);
+        parsedExpression.getValue(); // $hasSpelInjection
         return "success";
     }
-    @GetMapping("/spel/bad05")
-    public String spel05(String cmd) {
-        Expression expression = new SpelExpressionParser().parseExpression(cmd);
 
-        Object root = new Object();
-        Object value = new Object();
-        expression.setValue(root, value); // $hasSpelInjection
+    @GetMapping("/spel/bad05")
+    public String executeSpel05(String userInput) {
+        Expression parsedExpression = new SpelExpressionParser().parseExpression(userInput);
+
+        Object targetObject = new Object();
+        Object newValue = new Object();
+        parsedExpression.setValue(targetObject, newValue); // $hasSpelInjection
         return "success";
     }
+
     @GetMapping("/spel/bad06")
-    public String spel06(String cmd) {
-        Expression expression = PARSER.parseExpression(cmd);
-        expression.getValue(); // $hasSpelInjection
+    public String executeSpel06(String userInput) {
+        Expression parsedExpression = expressionParser.parseExpression(userInput);
+        parsedExpression.getValue(); // $hasSpelInjection
         return "success";
     }
 
     @GetMapping("/spel/bad07")
-    public String spel07(String cmd) {
-        Expression expression = PARSER.parseExpression(cmd);
-        expression.getValueType(); // $hasSpelInjection
+    public String executeSpel07(String userInput) {
+        Expression parsedExpression = expressionParser.parseExpression(userInput);
+        parsedExpression.getValueType(); // $hasSpelInjection
         return "success";
     }
 
     @GetMapping("/spel/bad08")
-    public String spel08(String cmd) {
-        Expression expression = PARSER.parseExpression(cmd);
+    public String executeSpel08(String userInput) {
+        Expression parsedExpression = expressionParser.parseExpression(userInput);
 
-        StandardEvaluationContext context = new StandardEvaluationContext();
-        expression.getValue(context); // $hasSpelInjection
+        StandardEvaluationContext evaluationContext = new StandardEvaluationContext();
+        parsedExpression.getValue(evaluationContext); // $hasSpelInjection
         return "success";
     }
 
     @GetMapping("/spel/good01")
-    public String spel09(String cmd) {
-        Expression expression = PARSER.parseExpression(cmd);
-        SimpleEvaluationContext context = SimpleEvaluationContext.forReadWriteDataBinding().build();
+    public String executeSpel09(String userInput) {
+        Expression parsedExpression = expressionParser.parseExpression(userInput);
+        SimpleEvaluationContext evaluationContext = SimpleEvaluationContext.forReadWriteDataBinding().build();
 
-        expression.getValue(context); // Safe - the expression is evaluated in a limited context
+        parsedExpression.getValue(evaluationContext); // Safe - the expression is evaluated in a limited context
         return "success";
     }
 }

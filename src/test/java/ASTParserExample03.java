@@ -4,10 +4,10 @@ import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
-public class ASTTestSimple03 {
+public class ASTParserExample03 {
     public static void main(String[] args) {
         // 示例 Java 代码
-        String source =
+        String javaSourceCode =
                 "public class ComplexExample {\n" +
                         "    private int number;\n" +
                         "    \n" +
@@ -32,22 +32,22 @@ public class ASTTestSimple03 {
                         "}";
 
         // 解析源代码
-        ParseResult<CompilationUnit> parseResult = new JavaParser().parse(source);
-        if(parseResult.isSuccessful() && parseResult.getResult().isPresent()) {
-            CompilationUnit compilationUnit = parseResult.getResult().get();
+        ParseResult<CompilationUnit> parsedResult = new JavaParser().parse(javaSourceCode);
+        if(parsedResult.isSuccessful() && parsedResult.getResult().isPresent()) {
+            CompilationUnit compilationUnit = parsedResult.getResult().get();
             // 生成并打印 XPath 树表示
-            printXPath(compilationUnit, "/");
+            printNodeXPath(compilationUnit, "/");
         }
     }
 
-    private static void printXPath(Node node, String path) {
-        String nodeName = node.getMetaModel().getTypeName();
-        String currentPath = path + nodeName;
+    private static void printNodeXPath(Node currentNode, String currentPath) {
+        String nodeTypeName = currentNode.getMetaModel().getTypeName();
+        String updatedPath = currentPath + nodeTypeName;
 
-        System.out.println(currentPath);
+        System.out.println(updatedPath);
 
-        for (Node child : node.getChildNodes()) {
-            printXPath(child, currentPath + "/");
+        for (Node childNode : currentNode.getChildNodes()) {
+            printNodeXPath(childNode, updatedPath + "/");
         }
     }
 }

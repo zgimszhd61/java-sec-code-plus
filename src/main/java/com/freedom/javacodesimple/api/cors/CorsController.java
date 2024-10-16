@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class CorsController {
 
-    @GetMapping("/cors/bad01")
-    public void cors01(ServerHttpResponse resp){
-        resp.getHeaders().add("Access-Control-Allow-Origin", "*");
+    @GetMapping("/cors/example01")
+    public void configureCorsHeaders(ServerHttpResponse response){
+        response.getHeaders().add("Access-Control-Allow-Origin", "*");
     }
 }

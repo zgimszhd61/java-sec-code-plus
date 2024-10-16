@@ -1,6 +1,3 @@
-package com.freedom.javacodesimple.api.jndi;
-
-import ognl.OgnlException;
 import org.springframework.scripting.ScriptSource;
 import org.springframework.scripting.groovy.GroovyScriptEvaluator;
 import org.springframework.scripting.support.StaticScriptSource;
@@ -17,14 +14,14 @@ import java.util.Hashtable;
 @RequestMapping("/api")
 public class JndiController {
     @GetMapping("/jndi/bad01")
-    public String jndi01(String payload) throws OgnlException, NamingException {
-        Hashtable<String, String> env = new Hashtable<String, String>();
-        env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.rmi.registry.RegistryContextFactory");
-        env.put(Context.PROVIDER_URL, "rmi://trusted-server:1099");
-        InitialContext ctx = new InitialContext(env);
+    public String lookupJndiResource(String jndiResourceName) throws NamingException {
+        Hashtable<String, String> jndiEnvironment = new Hashtable<>();
+        jndiEnvironment.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.rmi.registry.RegistryContextFactory");
+        jndiEnvironment.put(Context.PROVIDER_URL, "rmi://trusted-server:1099");
+        InitialContext initialContext = new InitialContext(jndiEnvironment);
 
         // BAD: User input used in lookup
-        ctx.lookup(payload);
+        initialContext.lookup(jndiResourceName);
         return  "{'msg':'false'}";
     }
 }

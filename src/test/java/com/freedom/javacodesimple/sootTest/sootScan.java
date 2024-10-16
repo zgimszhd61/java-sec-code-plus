@@ -8,12 +8,13 @@ import soot.util.cfgcmd.CFGToDotGraph;
 import soot.util.dot.DotGraph;
 
 import java.util.Collections;
+import java.nio.file.Paths;
 
 public class sootScan {
     public static void main(String[] args) {
         // 设置Soot的选项
         Options.v().set_prepend_classpath(true);
-        Options.v().set_process_dir(Collections.singletonList("/Users/a0000/mywork/mmjava/java-code-simple/target/classes/com/freedom/javacodesimple/"));
+        Options.v().set_process_dir(Collections.singletonList(Paths.get("target", "classes", "com", "freedom", "javacodesimple").toString()));
         Options.v().set_output_format(Options.output_format_none);
         Options.v().set_whole_program(true);
         Options.v().set_allow_phantom_refs(true);

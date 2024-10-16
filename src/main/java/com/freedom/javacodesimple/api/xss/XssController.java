@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class XssController {
     @GetMapping("xss/bad")
-    public String xss(@RequestParam("name") String name) {
-        return name;
+    public String getXssVulnerableResponse(@RequestParam("input") String userInput) {
+        return userInput;
     }
 }
