@@ -1,4 +1,3 @@
-
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ParseResult;
 import com.github.javaparser.ast.CompilationUnit;
@@ -35,11 +34,20 @@ public class ASTParserExample02 {
                         "    }\n" +
                         "}";
 
+        parseAndPrintAST(javaSourceCode);
+    }
+
+    /**
+     * 解析 Java 源代码并打印 AST 结构
+     *
+     * @param javaSourceCode Java 源代码字符串
+     */
+    public static void parseAndPrintAST(String javaSourceCode) {
         // 解析源代码
         ParseResult<CompilationUnit> compilationUnitResult = new JavaParser().parse(javaSourceCode);
         if (compilationUnitResult.isSuccessful() && compilationUnitResult.getResult().isPresent()) {
             CompilationUnit compilationUnit = compilationUnitResult.getResult().get();
-            
+
             // 打印 AST 结构
             System.out.println("Classes:");
             compilationUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(classDeclaration -> {

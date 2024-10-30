@@ -31,15 +31,22 @@ public class ASTParserExample03 {
                         "    }\n" +
                         "}";
 
-        // 解析源代码
-        ParseResult<CompilationUnit> parsedResult = new JavaParser().parse(javaSourceCode);
-        if(parsedResult.isSuccessful() && parsedResult.getResult().isPresent()) {
+        parseAndPrintXPath(javaSourceCode);
+    }
+
+    // 封装的函数：用于解析并打印源代码的 XPath 表示
+    public static void parseAndPrintXPath(String sourceCode) {
+        ParseResult<CompilationUnit> parsedResult = new JavaParser().parse(sourceCode);
+        if (parsedResult.isSuccessful() && parsedResult.getResult().isPresent()) {
             CompilationUnit compilationUnit = parsedResult.getResult().get();
             // 生成并打印 XPath 树表示
             printNodeXPath(compilationUnit, "/");
+        } else {
+            System.out.println("解析失败，无法生成 AST。");
         }
     }
 
+    // 打印节点的 XPath
     private static void printNodeXPath(Node currentNode, String currentPath) {
         String nodeTypeName = currentNode.getMetaModel().getTypeName();
         String updatedPath = currentPath + nodeTypeName;

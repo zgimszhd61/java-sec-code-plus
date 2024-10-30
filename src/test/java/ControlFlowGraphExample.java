@@ -9,31 +9,42 @@ import org.jgrapht.graph.DefaultDirectedGraph;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 
-// 如何将 Java 代码转化为控制流图（CFG）？请提供一个具体而简单的例子
 public class ControlFlowGraphExample {
 
     public static void main(String[] args) throws IOException {
-        // 读取 Java 文件
-        FileInputStream fileInputStream = new FileInputStream(Paths.get("src", "test", "java", "sample", "Example01.java").toString());
+        // 调用封装的函数来生成控制流图（CFG）
+        Graph<String, DefaultEdge> controlFlowGraph = generateControlFlowGraphFromFile(Path.of("src", "test", "java", "sample", "Example01.java"));
 
-        // 解析 Java 文件
-        ParseResult<CompilationUnit> parsingResult = new JavaParser().parse(fileInputStream);
-        if (parsingResult.isSuccessful() && parsingResult.getResult().isPresent()) {
-            CompilationUnit compilationUnit = parsingResult.getResult().get();
-            // 获取方法声明
-            MethodDeclaration targetMethod = compilationUnit.findFirst(MethodDeclaration.class).orElseThrow();
-
-            // 生成控制流图（CFG）
-            Graph<String, DefaultEdge> controlFlowGraph = generateControlFlowGraph(targetMethod);
-
-            // 输出控制流图（CFG）
+        // 输出控制流图（CFG）
+        if (controlFlowGraph != null) {
             controlFlowGraph.vertexSet().forEach(vertex ->
                     System.out.println("节点: " + vertex + ", 边: " + controlFlowGraph.edgesOf(vertex)));
         }
     }
 
+    // 封装的函数，用于从 Java 文件生成控制流图（CFG）
+    public static Graph<String, DefaultEdge> generateControlFlowGraphFromFile(Path filePath) throws IOException {
+        // 读取 Java 文件
+        try (FileInputStream fileInputStream = new FileInputStream(filePath.toString())) {
+            // 解析 Java 文件
+            ParseResult<CompilationUnit> parsingResult = new JavaParser().parse(fileInputStream);
+            if (parsingResult.isSuccessful() && parsingResult.getResult().isPresent()) {
+                CompilationUnit compilationUnit = parsingResult.getResult().get();
+                // 获取方法声明
+                MethodDeclaration targetMethod = compilationUnit.findFirst(MethodDeclaration.class).orElseThrow();
+
+                // 生成控制流图（CFG）
+                return generateControlFlowGraph(targetMethod);
+            } else {
+                System.err.println("无法成功解析 Java 文件。");
+            }
+        }
+        return null;
+    }
+
+    // 生成控制流图（CFG）
     public static Graph<String, DefaultEdge> generateControlFlowGraph(MethodDeclaration methodDeclaration) {
         Graph<String, DefaultEdge> controlFlowGraph = new DefaultDirectedGraph<>(DefaultEdge.class);
 

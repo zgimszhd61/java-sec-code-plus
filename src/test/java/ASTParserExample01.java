@@ -5,8 +5,6 @@ import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import com.github.javaparser.ast.body.MethodDeclaration;
 
-// 如何将java代码转化为抽象语法树（Abstract Syntax Tree, AST）？请提供一个具体而简单的例子
-
 public class ASTParserExample01 {
     public static void main(String[] args) {
         String sourceCode = "public class HelloWorld { "
@@ -15,10 +13,19 @@ public class ASTParserExample01 {
                 + "} "
                 + "}";
 
+        parseAndPrintAST(sourceCode);
+    }
+
+    /**
+     * 解析Java源代码并打印AST信息，包括类名和方法名。
+     *
+     * @param sourceCode 要解析的Java源代码
+     */
+    public static void parseAndPrintAST(String sourceCode) {
         // 解析源代码
         ParseResult<CompilationUnit> parsingResult = new JavaParser().parse(sourceCode);
 
-        if(parsingResult.isSuccessful() && parsingResult.getResult().isPresent()) {
+        if (parsingResult.isSuccessful() && parsingResult.getResult().isPresent()) {
             CompilationUnit astRoot = parsingResult.getResult().get();
 
             // 打印AST
