@@ -1,4 +1,4 @@
-package com.freedom.javacodesimple.cve;
+package com.freedom.securitysamples.cve;
 
 
 //https://forum.butian.net/share/2373

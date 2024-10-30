@@ -1,4 +1,4 @@
-package com.freedom.javacodesimple.cve;
+package com.freedom.securitysamples.cve;
 
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
