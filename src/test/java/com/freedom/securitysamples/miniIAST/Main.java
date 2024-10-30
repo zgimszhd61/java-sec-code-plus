@@ -1,4 +1,4 @@
-package com.freedom.javacodesimple.miniIAST;
+package com.freedom.securitysamples.miniIAST;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;

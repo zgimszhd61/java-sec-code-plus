@@ -1,4 +1,4 @@
-package com.freedom.javacodesimple.miniRASP;
+package com.freedom.securitysamples.miniRASP;
 
 import javassist.*;
 import javassist.expr.ExprEditor;

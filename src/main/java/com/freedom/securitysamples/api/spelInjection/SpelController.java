@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api")
 public class SpelController {
@@ -79,6 +82,86 @@ public class SpelController {
         return "success";
     }
 
+    @GetMapping("/spel/bad10")
+    public String executeSpel10(String userInput) {
+        // 在变量赋值中使用不受信任的输入
+        StandardEvaluationContext context = new StandardEvaluationContext();
+        context.setVariable("input", userInput);
+        Expression parsedExpression = expressionParser.parseExpression("#input");
+        return parsedExpression.getValue(context).toString(); // 危险
+    }
+
+    @GetMapping("/spel/bad11")
+    public String executeSpel11(String userInput) {
+        // 在方法调用中使用不受信任的输入
+        Map<String, Object> contextMap = new HashMap<>();
+        contextMap.put("cmd", userInput);
+        StandardEvaluationContext context = new StandardEvaluationContext();
+        context.setRootObject(contextMap);
+        Expression parsedExpression = expressionParser.parseExpression("cmd.toString()");
+        return parsedExpression.getValue(context).toString(); // 危险
+    }
+
+    @GetMapping("/spel/bad12")
+    public String executeSpel12(String userInput) {
+        // 在类型转换中使用不受信任的输入
+        Expression parsedExpression = expressionParser.parseExpression("T(" + userInput + ")");
+        return parsedExpression.getValue().toString(); // 危险
+    }
+
+    @GetMapping("/spel/bad13")
+    public String executeSpel13(String userInput) {
+        // 在属性访问中使用不受信任的输入
+        StandardEvaluationContext context = new StandardEvaluationContext();
+        Expression parsedExpression = expressionParser.parseExpression("@systemProperties['" + userInput + "']");
+        return parsedExpression.getValue(context).toString(); // 危险
+    }
+
+    @GetMapping("/spel/bad14")
+    public String executeSpel14(String userInput) {
+        // 在列表操作中使用不受信任的输入
+        Expression parsedExpression = expressionParser.parseExpression("{" + userInput + "}");
+        return parsedExpression.getValue().toString(); // 危险
+    }
+
+    @GetMapping("/spel/bad15")
+    public String executeSpel15(String userInput) {
+        // 在运算符中使用不受信任的输入
+        Expression parsedExpression = expressionParser.parseExpression("2 " + userInput + " 2");
+        return parsedExpression.getValue().toString(); // 危险
+    }
+
+    // 安全的实现示例
+    @GetMapping("/spel/good02")
+    public String safeSpel01(String userInput) {
+        // 使用白名单验证输入
+        if(!isValidExpression(userInput)) {
+            return "Invalid input";
+        }
+        SimpleEvaluationContext context = SimpleEvaluationContext.forReadOnlyDataBinding().build();
+        Expression parsedExpression = expressionParser.parseExpression(userInput);
+        return parsedExpression.getValue(context).toString();
+    }
+
+    @GetMapping("/spel/good03")
+    public String safeSpel02(String userInput) {
+        // 使用参数化表达式
+        StandardEvaluationContext context = new StandardEvaluationContext();
+        context.setVariable("safeInput", userInput);
+        Expression parsedExpression = expressionParser.parseExpression("#safeInput?.toString()");
+        return parsedExpression.getValue(context).toString();
+    }
+
+    private boolean isValidExpression(String input) {
+        // 实现表达式白名单验证逻辑
+        String[] allowedExpressions = {"true", "false", "null", "empty"};
+        for(String allowed : allowedExpressions) {
+            if(allowed.equals(input)) {
+                return true;
+            }
+        }
+        return false;
+    }
     @GetMapping("/spel/good01")
     public String executeSpel09(String userInput) {
         Expression parsedExpression = expressionParser.parseExpression(userInput);

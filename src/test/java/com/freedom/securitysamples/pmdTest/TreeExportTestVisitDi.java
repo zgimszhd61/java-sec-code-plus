@@ -1,4 +1,4 @@
-package com.freedom.javacodesimple.pmdTest;
+package com.freedom.securitysamples.pmdTest;
 
 import java.io.IOException;
 import java.nio.file.Files;

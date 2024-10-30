@@ -1,4 +1,4 @@
-package com.freedom.javacodesimple.miniRASP;
+package com.freedom.securitysamples.miniRASP;
 
 public class DemoClass {
     public void displayMessage() {

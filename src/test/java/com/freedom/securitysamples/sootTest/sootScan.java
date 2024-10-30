@@ -1,4 +1,4 @@
-package com.freedom.javacodesimple.sootTest;
+package com.freedom.securitysamples.sootTest;
 
 import soot.*;
 import soot.options.Options;

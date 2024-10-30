@@ -1,4 +1,4 @@
-package com.freedom.javacodesimple.miniRASP;
+package com.freedom.securitysamples.miniRASP;
 
 import javassist.ClassPool;
 import javassist.CtClass;
@@ -10,7 +10,7 @@ import java.security.ProtectionDomain;
 public class Transformer implements ClassFileTransformer {
     @Override
     public byte[] transform(ClassLoader classLoader, String fullyQualifiedClassName, Class<?> redefinedClass, ProtectionDomain protectionDomain, byte[] classFileBuffer) {
-        if (fullyQualifiedClassName.equals("com/freedom/javacodesimple/miniRASP/TargetClass")) {
+        if (fullyQualifiedClassName.equals("com/freedom/securitysamples/miniRASP/TargetClass")) {
             try {
                 ClassPool classPool = ClassPool.getDefault();
                 CtClass targetClass = classPool.get("com.freedom.javacodesimple.miniRASP.TargetClass");
