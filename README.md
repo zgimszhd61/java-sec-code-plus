@@ -32,7 +32,7 @@ export PATH=$M2_HOME/bin:$JAVA_HOME/bin:$PATH
 source /etc/profile
 
 # 下载项目文件
-git clone https://github.com/zgimszhd61/java-code-simple.git
+git clone https://github.com/zgimszhd61/java-sec-code-plus.git
 cd java-code-simple
 
 # 编译和运行
