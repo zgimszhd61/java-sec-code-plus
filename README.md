@@ -188,7 +188,7 @@ mvn spring-boot:run
   </mirrors>
 </settings>
 ```
-</details>
+
 
 ## 如果80或8080端口被占用
 ```bash
@@ -196,6 +196,7 @@ mvn spring-boot:run
 lsof -i:8080 
 kill -9 [PID]
 ```
+</details>
 
 <details>
   <summary>漏洞验证接口</summary>
