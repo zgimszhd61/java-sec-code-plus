@@ -125,7 +125,9 @@ mvn spring-boot:run
 
 ------
 
-## 部署指南（以阿里云服务器为例）
+<details>
+  <summary>## 部署指南（以阿里云服务器为例）</summary>
+
 - 按照以下步骤部署，预计耗时约10分钟。
 
 ### LINUX环境下的操作
@@ -189,6 +191,7 @@ mvn spring-boot:run
   </mirrors>
 </settings>
 ```
+</details>
 
 ## 如果80或8080端口被占用
 ```bash
