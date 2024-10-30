@@ -1,9 +1,133 @@
-```markdown
 ## 项目简介
-- 这是一个基于SpringBoot的安全教育脚手架，按照教程操作可以快速部署并运行。
-- **目标**：提供一站式的安全能力评估平台。
+- 这是一个基于SpringBoot的安全教育框架，提供了清晰的教程，帮助用户快速部署和运行平台。
+- **项目目标**：打造一个简便的一站式平台，用于全面评估和提升系统的安全能力。
 
-## 部署指南（以阿里云服务器为例）
+## 本地使用指南
+```
+git clone --depth 1 https://github.com/zgimszhd61/java-sec-code-plus
+mvn install
+mvn spring-boot:run
+```
+------
+<details>
+  <summary>支持的漏洞类别</summary>
+
+  #### authBypass
+  身份认证绕过漏洞允许攻击者绕过认证机制，未经授权即可访问受限区域或功能。
+
+  #### authorizationBypass
+  授权绕过漏洞是指攻击者可以获得其无权使用的资源，通常是由于权限验证的缺陷所致。
+
+  #### beanShellInjection
+  BeanShell注入漏洞是由于在BeanShell解释器中执行不可信输入而引发的，可导致任意代码执行。
+
+  #### brokenAccessControl
+  访问控制缺失漏洞使未经授权的用户可以访问受限数据或功能，可能会影响数据的机密性和完整性。
+
+  #### businessLogicVuln
+  业务逻辑漏洞是由应用程序逻辑设计缺陷引起的，可能导致意料之外的行为或应用程序功能被滥用。
+
+  #### clickjacking
+  点击劫持攻击诱使用户点击看似无害的元素，导致在网站上执行未经用户意愿的操作。
+
+  #### commandInjection
+  命令注入漏洞允许攻击者在服务器上执行任意系统命令，可能导致系统的完全控制。
+
+  #### corsConfig
+  CORS（跨域资源共享）配置漏洞由于配置不当，允许未经授权的跨域请求。
+
+  #### crossSiteScripting
+  跨站脚本攻击（XSS）是指攻击者将恶意脚本注入到网页中，其他用户访问时会执行该脚本。
+
+  #### cryptoVuln
+  加密漏洞由于弱加密算法或不当的加密实现引起，可能导致数据泄露或被篡改。
+
+  #### defaultCredentials
+  默认凭证漏洞是指系统或应用程序使用容易被猜测的默认用户名和密码，导致未经授权访问。
+
+  #### groovyInjection
+  Groovy注入漏洞是当用户输入被执行为Groovy脚本的一部分时，可能导致任意代码执行。
+
+  #### hardcodedCredentials
+  硬编码凭证指将静态的用户名和密码嵌入到代码中，容易被攻击者提取并进行未经授权的访问。
+
+  #### headerInjection
+  头部注入是指通过未经验证的用户输入操纵HTTP头部，可能导致响应分割或跨站脚本攻击。
+
+  #### insecureDirectObjectReference
+  不安全的直接对象引用漏洞允许攻击者通过操纵引用直接访问资源，绕过授权控制。
+
+  #### jndiInjection
+  JNDI注入涉及将不可信的数据注入JNDI查找中，可能导致远程代码执行或数据泄露。
+
+  #### jsonpCallback
+  JSONP回调漏洞是当不受信任的JSONP端点允许攻击者在响应中包含恶意JavaScript，从而引发XSS攻击。
+
+  #### ldapInjection
+  LDAP注入漏洞发生在用户输入不当使用于LDAP查询时，攻击者可操控LDAP语句，访问未经授权的数据。
+
+  #### misconfig
+  配置不当漏洞是由软件的不正确或不安全配置引起的，使系统容易受到各种攻击。
+
+  #### mvelInjection
+  MVEL注入漏洞是由于用户输入被用于MVEL表达式中，且未进行适当的验证，可能导致任意代码执行。
+
+  #### onglInjection
+  ONGL注入漏洞是当用户输入在ONGL表达式中被执行，未经过验证时，攻击者可以执行意外命令。
+
+  #### openRedirect
+  开放重定向漏洞允许攻击者将用户重定向到恶意网站，通常通过未验证的URL参数实现。
+
+  #### pathTraversal
+  路径遍历漏洞允许攻击者通过操控文件路径参数读取或写入服务器上的任意文件。
+
+  #### regularExpressionDOS
+  正则表达式拒绝服务（ReDoS）是指攻击者利用应用程序的正则表达式实现导致资源耗尽，进而引发拒绝服务攻击。
+
+  #### scriptEngineInjection
+  脚本引擎注入涉及在脚本引擎中执行不受信任的输入，可能导致任意代码执行。
+
+  #### securityHeaderMissing
+  缺少安全头部漏洞是由于HTTP响应中未包含关键的安全头部，导致应用程序容易受到各种攻击。
+
+  #### sensitiveDataExposure
+  敏感数据泄露是指应用程序未对敏感信息进行充分保护，导致数据被盗或被滥用的风险。
+
+  #### serverSideRequestForgery
+  服务器端请求伪造（SSRF）允许攻击者从服务器发起请求，访问内部或外部系统，可能导致信息泄露。
+
+  #### spelInjection
+  SPEL注入漏洞是由于用户输入未经验证便用于Spring表达式语言（SpEL）中，可能导致任意代码执行。
+
+  #### sqlInjection
+  SQL注入漏洞允许攻击者操控SQL查询，可能导致未经授权的数据访问或数据库篡改。
+
+  #### templateInjection
+  模板注入漏洞是指不受信任的输入被注入到模板引擎中，可能导致代码执行和应用程序被攻陷。
+
+  #### thirdParty
+  第三方漏洞是指由应用程序集成的第三方库或依赖项中的弱点引发的安全问题。
+
+  #### unsafeDeserialization
+  不安全反序列化漏洞发生在对不受信任的数据进行反序列化时，攻击者可能借此执行任意代码。
+
+  #### weakPassword
+  弱密码漏洞是由于使用容易猜测或不够复杂的密码，导致密码容易被暴力破解。
+
+  #### xmlExternalEntity
+  XML外部实体（XXE）漏洞发生在对包含外部实体引用的XML输入处理不当时，可能导致文件泄露或服务器端请求伪造。
+
+  #### yamlDeserialization
+  YAML反序列化漏洞是当对用户控制的YAML数据进行反序列化而未进行适当验证时，可能导致任意代码执行。
+
+</details>
+
+
+------
+
+<details>
+  <summary>部署指南（以阿里云服务器为例）</summary>
+
 - 按照以下步骤部署，预计耗时约10分钟。
 
 ### LINUX环境下的操作
@@ -67,6 +191,7 @@ mvn spring-boot:run
   </mirrors>
 </settings>
 ```
+</details>
 
 ## 如果80或8080端口被占用
 ```bash
@@ -106,21 +231,4 @@ GET http://localhost:80/api/spel/bad01?cmd=vulnhere
   - 供应链安全产品测试
 - **人工代码审计学习**
 
-## 更新日志
-- **2023-06**：项目初始化，创建ssrf、rce、xss接口及健康检查。
-- **2023-07-01**：新增反序列化和Ognl。
-- **2023-07-04**：新增bsh、groovy、mvel、processbuilder、redos、jndi。
-
-## 参与共建
-- 联系微信：7908300 领取任务
-- 或直接在项目中提出issue。
-
-## 下一步计划
-- [ ] 异常信息回显至页面
-- [ ] 无频率限制的短信验证码
-- [ ] 邮箱和手机号信息的枚举攻击
-- [ ] 开源许可证风险模拟
-- [ ] 高星CVEs漏洞复现
-- [ ] 不安全的加密算法（如静态盐）
-- [ ] 创建其他分支：Android、Python、Bun、iOS等应用漏洞Benchmark
-```
+![image](https://github.com/user-attachments/assets/025d993a-59b1-420d-9c69-aa0617e18dfc)
