@@ -1,4 +1,3 @@
-```markdown
 ## 项目简介
 - 这是一个基于SpringBoot的安全教育脚手架，按照教程操作可以快速部署并运行。
 - **目标**：提供一站式的安全能力评估平台。
@@ -115,6 +114,9 @@ GET http://localhost:80/api/spel/bad01?cmd=vulnhere
 - 联系微信：7908300 领取任务
 - 或直接在项目中提出issue。
 
+![image](https://github.com/user-attachments/assets/025d993a-59b1-420d-9c69-aa0617e18dfc)
+
+
 ## 下一步计划
 - [ ] 异常信息回显至页面
 - [ ] 无频率限制的短信验证码
@@ -123,4 +125,3 @@ GET http://localhost:80/api/spel/bad01?cmd=vulnhere
 - [ ] 高星CVEs漏洞复现
 - [ ] 不安全的加密算法（如静态盐）
 - [ ] 创建其他分支：Android、Python、Bun、iOS等应用漏洞Benchmark
-```
