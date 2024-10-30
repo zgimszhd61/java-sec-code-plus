@@ -9,187 +9,119 @@ mvn install
 mvn spring-boot:run
 ```
 ------
-### 支持的漏洞类别
-
 <details>
-<summary>authBypass</summary>
-身份认证绕过漏洞允许攻击者绕过认证机制，未经授权即可访问受限区域或功能。
+  <summary>支持的漏洞类别</summary>
+
+  #### authBypass
+  身份认证绕过漏洞允许攻击者绕过认证机制，未经授权即可访问受限区域或功能。
+
+  #### authorizationBypass
+  授权绕过漏洞是指攻击者可以获得其无权使用的资源，通常是由于权限验证的缺陷所致。
+
+  #### beanShellInjection
+  BeanShell注入漏洞是由于在BeanShell解释器中执行不可信输入而引发的，可导致任意代码执行。
+
+  #### brokenAccessControl
+  访问控制缺失漏洞使未经授权的用户可以访问受限数据或功能，可能会影响数据的机密性和完整性。
+
+  #### businessLogicVuln
+  业务逻辑漏洞是由应用程序逻辑设计缺陷引起的，可能导致意料之外的行为或应用程序功能被滥用。
+
+  #### clickjacking
+  点击劫持攻击诱使用户点击看似无害的元素，导致在网站上执行未经用户意愿的操作。
+
+  #### commandInjection
+  命令注入漏洞允许攻击者在服务器上执行任意系统命令，可能导致系统的完全控制。
+
+  #### corsConfig
+  CORS（跨域资源共享）配置漏洞由于配置不当，允许未经授权的跨域请求。
+
+  #### crossSiteScripting
+  跨站脚本攻击（XSS）是指攻击者将恶意脚本注入到网页中，其他用户访问时会执行该脚本。
+
+  #### cryptoVuln
+  加密漏洞由于弱加密算法或不当的加密实现引起，可能导致数据泄露或被篡改。
+
+  #### defaultCredentials
+  默认凭证漏洞是指系统或应用程序使用容易被猜测的默认用户名和密码，导致未经授权访问。
+
+  #### groovyInjection
+  Groovy注入漏洞是当用户输入被执行为Groovy脚本的一部分时，可能导致任意代码执行。
+
+  #### hardcodedCredentials
+  硬编码凭证指将静态的用户名和密码嵌入到代码中，容易被攻击者提取并进行未经授权的访问。
+
+  #### headerInjection
+  头部注入是指通过未经验证的用户输入操纵HTTP头部，可能导致响应分割或跨站脚本攻击。
+
+  #### insecureDirectObjectReference
+  不安全的直接对象引用漏洞允许攻击者通过操纵引用直接访问资源，绕过授权控制。
+
+  #### jndiInjection
+  JNDI注入涉及将不可信的数据注入JNDI查找中，可能导致远程代码执行或数据泄露。
+
+  #### jsonpCallback
+  JSONP回调漏洞是当不受信任的JSONP端点允许攻击者在响应中包含恶意JavaScript，从而引发XSS攻击。
+
+  #### ldapInjection
+  LDAP注入漏洞发生在用户输入不当使用于LDAP查询时，攻击者可操控LDAP语句，访问未经授权的数据。
+
+  #### misconfig
+  配置不当漏洞是由软件的不正确或不安全配置引起的，使系统容易受到各种攻击。
+
+  #### mvelInjection
+  MVEL注入漏洞是由于用户输入被用于MVEL表达式中，且未进行适当的验证，可能导致任意代码执行。
+
+  #### onglInjection
+  ONGL注入漏洞是当用户输入在ONGL表达式中被执行，未经过验证时，攻击者可以执行意外命令。
+
+  #### openRedirect
+  开放重定向漏洞允许攻击者将用户重定向到恶意网站，通常通过未验证的URL参数实现。
+
+  #### pathTraversal
+  路径遍历漏洞允许攻击者通过操控文件路径参数读取或写入服务器上的任意文件。
+
+  #### regularExpressionDOS
+  正则表达式拒绝服务（ReDoS）是指攻击者利用应用程序的正则表达式实现导致资源耗尽，进而引发拒绝服务攻击。
+
+  #### scriptEngineInjection
+  脚本引擎注入涉及在脚本引擎中执行不受信任的输入，可能导致任意代码执行。
+
+  #### securityHeaderMissing
+  缺少安全头部漏洞是由于HTTP响应中未包含关键的安全头部，导致应用程序容易受到各种攻击。
+
+  #### sensitiveDataExposure
+  敏感数据泄露是指应用程序未对敏感信息进行充分保护，导致数据被盗或被滥用的风险。
+
+  #### serverSideRequestForgery
+  服务器端请求伪造（SSRF）允许攻击者从服务器发起请求，访问内部或外部系统，可能导致信息泄露。
+
+  #### spelInjection
+  SPEL注入漏洞是由于用户输入未经验证便用于Spring表达式语言（SpEL）中，可能导致任意代码执行。
+
+  #### sqlInjection
+  SQL注入漏洞允许攻击者操控SQL查询，可能导致未经授权的数据访问或数据库篡改。
+
+  #### templateInjection
+  模板注入漏洞是指不受信任的输入被注入到模板引擎中，可能导致代码执行和应用程序被攻陷。
+
+  #### thirdParty
+  第三方漏洞是指由应用程序集成的第三方库或依赖项中的弱点引发的安全问题。
+
+  #### unsafeDeserialization
+  不安全反序列化漏洞发生在对不受信任的数据进行反序列化时，攻击者可能借此执行任意代码。
+
+  #### weakPassword
+  弱密码漏洞是由于使用容易猜测或不够复杂的密码，导致密码容易被暴力破解。
+
+  #### xmlExternalEntity
+  XML外部实体（XXE）漏洞发生在对包含外部实体引用的XML输入处理不当时，可能导致文件泄露或服务器端请求伪造。
+
+  #### yamlDeserialization
+  YAML反序列化漏洞是当对用户控制的YAML数据进行反序列化而未进行适当验证时，可能导致任意代码执行。
+
 </details>
 
-<details>
-<summary>authorizationBypass</summary>
-授权绕过漏洞是指攻击者可以获得其无权使用的资源，通常是由于权限验证的缺陷所致。
-</details>
-
-<details>
-<summary>beanShellInjection</summary>
-BeanShell注入漏洞是由于在BeanShell解释器中执行不可信输入而引发的，可导致任意代码执行。
-</details>
-
-<details>
-<summary>brokenAccessControl</summary>
-访问控制缺失漏洞使未经授权的用户可以访问受限数据或功能，可能会影响数据的机密性和完整性。
-</details>
-
-<details>
-<summary>businessLogicVuln</summary>
-业务逻辑漏洞是由应用程序逻辑设计缺陷引起的，可能导致意料之外的行为或应用程序功能被滥用。
-</details>
-
-<details>
-<summary>clickjacking</summary>
-点击劫持攻击诱使用户点击看似无害的元素，导致在网站上执行未经用户意愿的操作。
-</details>
-
-<details>
-<summary>commandInjection</summary>
-命令注入漏洞允许攻击者在服务器上执行任意系统命令，可能导致系统的完全控制。
-</details>
-
-<details>
-<summary>corsConfig</summary>
-CORS（跨域资源共享）配置漏洞由于配置不当，允许未经授权的跨域请求。
-</details>
-
-<details>
-<summary>crossSiteScripting</summary>
-跨站脚本攻击（XSS）是指攻击者将恶意脚本注入到网页中，其他用户访问时会执行该脚本。
-</details>
-
-<details>
-<summary>cryptoVuln</summary>
-加密漏洞由于弱加密算法或不当的加密实现引起，可能导致数据泄露或被篡改。
-</details>
-
-<details>
-<summary>defaultCredentials</summary>
-默认凭证漏洞是指系统或应用程序使用容易被猜测的默认用户名和密码，导致未经授权访问。
-</details>
-
-<details>
-<summary>groovyInjection</summary>
-Groovy注入漏洞是当用户输入被执行为Groovy脚本的一部分时，可能导致任意代码执行。
-</details>
-
-<details>
-<summary>hardcodedCredentials</summary>
-硬编码凭证指将静态的用户名和密码嵌入到代码中，容易被攻击者提取并进行未经授权的访问。
-</details>
-
-<details>
-<summary>headerInjection</summary>
-头部注入是指通过未经验证的用户输入操纵HTTP头部，可能导致响应分割或跨站脚本攻击。
-</details>
-
-<details>
-<summary>insecureDirectObjectReference</summary>
-不安全的直接对象引用漏洞允许攻击者通过操纵引用直接访问资源，绕过授权控制。
-</details>
-
-<details>
-<summary>jndiInjection</summary>
-JNDI注入涉及将不可信的数据注入JNDI查找中，可能导致远程代码执行或数据泄露。
-</details>
-
-<details>
-<summary>jsonpCallback</summary>
-JSONP回调漏洞是当不受信任的JSONP端点允许攻击者在响应中包含恶意JavaScript，从而引发XSS攻击。
-</details>
-
-<details>
-<summary>ldapInjection</summary>
-LDAP注入漏洞发生在用户输入不当使用于LDAP查询时，攻击者可操控LDAP语句，访问未经授权的数据。
-</details>
-
-<details>
-<summary>misconfig</summary>
-配置不当漏洞是由软件的不正确或不安全配置引起的，使系统容易受到各种攻击。
-</details>
-
-<details>
-<summary>mvelInjection</summary>
-MVEL注入漏洞是由于用户输入被用于MVEL表达式中，且未进行适当的验证，可能导致任意代码执行。
-</details>
-
-<details>
-<summary>onglInjection</summary>
-ONGL注入漏洞是当用户输入在ONGL表达式中被执行，未经过验证时，攻击者可以执行意外命令。
-</details>
-
-<details>
-<summary>openRedirect</summary>
-开放重定向漏洞允许攻击者将用户重定向到恶意网站，通常通过未验证的URL参数实现。
-</details>
-
-<details>
-<summary>pathTraversal</summary>
-路径遍历漏洞允许攻击者通过操控文件路径参数读取或写入服务器上的任意文件。
-</details>
-
-<details>
-<summary>regularExpressionDOS</summary>
-正则表达式拒绝服务（ReDoS）是指攻击者利用应用程序的正则表达式实现导致资源耗尽，进而引发拒绝服务攻击。
-</details>
-
-<details>
-<summary>scriptEngineInjection</summary>
-脚本引擎注入涉及在脚本引擎中执行不受信任的输入，可能导致任意代码执行。
-</details>
-
-<details>
-<summary>securityHeaderMissing</summary>
-缺少安全头部漏洞是由于HTTP响应中未包含关键的安全头部，导致应用程序容易受到各种攻击。
-</details>
-
-<details>
-<summary>sensitiveDataExposure</summary>
-敏感数据泄露是指应用程序未对敏感信息进行充分保护，导致数据被盗或被滥用的风险。
-</details>
-
-<details>
-<summary>serverSideRequestForgery</summary>
-服务器端请求伪造（SSRF）允许攻击者从服务器发起请求，访问内部或外部系统，可能导致信息泄露。
-</details>
-
-<details>
-<summary>spelInjection</summary>
-SPEL注入漏洞是由于用户输入未经验证便用于Spring表达式语言（SpEL）中，可能导致任意代码执行。
-</details>
-
-<details>
-<summary>sqlInjection</summary>
-SQL注入漏洞允许攻击者操控SQL查询，可能导致未经授权的数据访问或数据库篡改。
-</details>
-
-<details>
-<summary>templateInjection</summary>
-模板注入漏洞是指不受信任的输入被注入到模板引擎中，可能导致代码执行和应用程序被攻陷。
-</details>
-
-<details>
-<summary>thirdParty</summary>
-第三方漏洞是指由应用程序集成的第三方库或依赖项中的弱点引发的安全问题。
-</details>
-
-<details>
-<summary>unsafeDeserialization</summary>
-不安全反序列化漏洞发生在对不受信任的数据进行反序列化时，攻击者可能借此执行任意代码。
-</details>
-
-<details>
-<summary>weakPassword</summary>
-弱密码漏洞是由于使用容易猜测或不够复杂的密码，导致密码容易被暴力破解。
-</details>
-
-<details>
-<summary>xmlExternalEntity</summary>
-XML外部实体（XXE）漏洞发生在对包含外部实体引用的XML输入处理不当时，可能导致文件泄露或服务器端请求伪造。
-</details>
-
-<details>
-<summary>yamlDeserialization</summary>
-YAML反序列化漏洞是当对用户控制的YAML数据进行反序列化而未进行适当验证时，可能导致任意代码执行。
-</details>
 
 ------
 
