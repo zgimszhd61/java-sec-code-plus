@@ -122,13 +122,3 @@ GET http://localhost:80/api/spel/bad01?cmd=vulnhere
 - 或直接在项目中提出issue。
 
 ![image](https://github.com/user-attachments/assets/025d993a-59b1-420d-9c69-aa0617e18dfc)
-
-
-## 下一步计划
-- [ ] 异常信息回显至页面
-- [ ] 无频率限制的短信验证码
-- [ ] 邮箱和手机号信息的枚举攻击
-- [ ] 开源许可证风险模拟
-- [ ] 高星CVEs漏洞复现
-- [ ] 不安全的加密算法（如静态盐）
-- [ ] 创建其他分支：Android、Python、Bun、iOS等应用漏洞Benchmark
