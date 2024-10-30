@@ -2,6 +2,13 @@
 - 这是一个基于SpringBoot的安全教育框架，提供了清晰的教程，帮助用户快速部署和运行平台。
 - **项目目标**：打造一个简便的一站式平台，用于全面评估和提升系统的安全能力。
 
+## 使用指南
+```
+git clone --depth 1 https://github.com/zgimszhd61/java-sec-code-plus
+mvn install
+mvn spring-boot:run
+```
+
 ## 部署指南（以阿里云服务器为例）
 - 按照以下步骤部署，预计耗时约10分钟。
 
