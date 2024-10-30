@@ -8,7 +8,7 @@ git clone --depth 1 https://github.com/zgimszhd61/java-sec-code-plus
 mvn install
 mvn spring-boot:run
 ```
-------
+
 <details>
   <summary>支持的漏洞类别</summary>
 
@@ -122,9 +122,6 @@ mvn spring-boot:run
 
 </details>
 
-
-------
-
 <details>
   <summary>部署指南（以阿里云服务器为例）</summary>
 
@@ -225,12 +222,13 @@ GET http://localhost:80/api/spel/bad01?cmd=vulnhere
 ```
 </details>
 
-## 应用场景
+<details>
+  <summary>应用场景</summary>
 - **安全防护产品测试**：
   - IDE插件测试
   - WAF能力测试
   - 白盒、黑盒、IAST扫描测试
   - 供应链安全产品测试
 - **人工代码审计学习**
-
+</details>
 ![image](https://github.com/user-attachments/assets/025d993a-59b1-420d-9c69-aa0617e18dfc)
