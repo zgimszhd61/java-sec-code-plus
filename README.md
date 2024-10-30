@@ -231,13 +231,4 @@ GET http://localhost:80/api/spel/bad01?cmd=vulnhere
   - 供应链安全产品测试
 - **人工代码审计学习**
 
-## 更新日志
-- **2023-06**：项目初始化，创建ssrf、rce、xss接口及健康检查。
-- **2023-07-01**：新增反序列化和Ognl。
-- **2023-07-04**：新增bsh、groovy、mvel、processbuilder、redos、jndi。
-
-## 参与共建
-- 联系微信：7908300 领取任务
-- 或直接在项目中提出issue。
-
 ![image](https://github.com/user-attachments/assets/025d993a-59b1-420d-9c69-aa0617e18dfc)
