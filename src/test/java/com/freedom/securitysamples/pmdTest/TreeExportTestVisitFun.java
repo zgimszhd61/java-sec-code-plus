@@ -18,7 +18,7 @@ import net.sourceforge.pmd.lang.java.ast.JavaVisitorBase;
 public class TreeExportTestVisitFun {
     public static void main(String[] args) throws IOException {
         // 定义要读取的Java文件的路径
-        String filePath = "src/main/java/com/freedom/javacodesimple/api/bsh/BshController.java";
+        String filePath = "src/main/java/com/freedom/securitysamples/api/beanShellInjection/ScriptExecutionController.java";
         // 读取文件内容并转换为字符串
         String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
 

@@ -19,7 +19,7 @@ import net.sourceforge.pmd.lang.java.ast.JavaVisitorBase;
 public class TreeExportTestVisit {
     public static void main(String[] args) throws IOException {
 
-        String filePath = "src/main/java/com/freedom/javacodesimple/api/bsh/BshController.java";
+        String filePath = "src/main/java/com/freedom/securitysamples/api/beanShellInjection/ScriptExecutionController.java";
         String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
 
         PmdCapableLanguage java = (PmdCapableLanguage) LanguageRegistry.PMD.getLanguageById("java");

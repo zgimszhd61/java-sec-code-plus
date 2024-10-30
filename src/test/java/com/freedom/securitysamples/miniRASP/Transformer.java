@@ -13,7 +13,7 @@ public class Transformer implements ClassFileTransformer {
         if (fullyQualifiedClassName.equals("com/freedom/securitysamples/miniRASP/TargetClass")) {
             try {
                 ClassPool classPool = ClassPool.getDefault();
-                CtClass targetClass = classPool.get("com.freedom.javacodesimple.miniRASP.TargetClass");
+                CtClass targetClass = classPool.get("com.freedom.securitysamples.miniRASP.TargetClass");
                 CtMethod targetMethod = targetClass.getDeclaredMethod("test");
                 targetMethod.insertBefore("{ System.out.println(\"hello world\"); }");
                 return targetClass.toBytecode();

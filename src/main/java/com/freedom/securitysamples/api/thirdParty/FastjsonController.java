@@ -79,7 +79,7 @@ public class FastjsonController {
             config.setSafeMode(true);
 
             // 2. 使用白名单方式
-            config.addAccept("com.freedom.javacodesimple.model.");
+            config.addAccept("com.freedom.securitysamples.model.");
 
             // 3. 指定具体的目标类型
             JSONObject result = JSON.parseObject(jsonStr, JSONObject.class, config);

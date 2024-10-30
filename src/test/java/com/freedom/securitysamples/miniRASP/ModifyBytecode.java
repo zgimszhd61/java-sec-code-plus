@@ -10,7 +10,7 @@ public class ModifyBytecode {
         ClassPool classPool = ClassPool.getDefault();
 
         // 获取要修改的类
-        CtClass targetClass = classPool.get("com.freedom.javacodesimple.miniRASP.onTestprint");
+        CtClass targetClass = classPool.get("com.freedom.securitysamples.miniRASP.onTestprint");
 
         // 获取类中的所有方法
         for (CtMethod method : targetClass.getDeclaredMethods()) {

@@ -14,7 +14,7 @@ import java.io.IOException;
 public class ScriptExecutionController {
 
     // 原有的不安全示例
-    @GetMapping("/bsh/evaluateScript")
+    @GetMapping("/beanShellInjection/evaluateScript")
     public String evaluateBshScript(String scriptPayload) throws OgnlException {
         BshScriptEvaluator scriptEvaluator = new BshScriptEvaluator();
         scriptEvaluator.evaluate(new StaticScriptSource(scriptPayload));
