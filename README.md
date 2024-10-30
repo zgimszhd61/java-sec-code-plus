@@ -126,7 +126,7 @@ mvn spring-boot:run
 ------
 
 <details>
-  <summary>## 部署指南（以阿里云服务器为例）</summary>
+  <summary>部署指南（以阿里云服务器为例）</summary>
 
 - 按照以下步骤部署，预计耗时约10分钟。
 
