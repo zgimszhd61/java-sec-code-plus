@@ -1,4 +1,4 @@
-package com.freedom.securitysamples.api.remoteCodeExecution;
+package com.freedom.securitysamples.api.commandInjection;
 
 import cn.hutool.core.util.RuntimeUtil;
 import org.springframework.web.bind.annotation.GetMapping;

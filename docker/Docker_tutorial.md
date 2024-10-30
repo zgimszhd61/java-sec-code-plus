@@ -22,7 +22,7 @@ COPY settings.xml /usr/share/maven/conf/settings.xml
 RUN git clone https://github.com/zgimszhd61/java-sec-code-plus.git
 
 # 设置工作目录
-WORKDIR /app/java-code-simple
+WORKDIR /app/java-sec-code-plus
 
 # 编译项目
 RUN mvn install && mvn package

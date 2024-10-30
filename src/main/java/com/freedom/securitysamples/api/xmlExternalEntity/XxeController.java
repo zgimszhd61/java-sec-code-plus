@@ -16,7 +16,6 @@ import java.io.InputStream;
 @RequestMapping("/api")
 public class XxeController {
 
-
     //2023.06.23:返回值为success.
     //攻击Payload:"<!DOCTYPE doc [ \n" +
     //                    "<!ENTITY xxe SYSTEM \"http://127.0.0.1:1664\">\n" +

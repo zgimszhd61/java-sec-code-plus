@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.freedom</groupId>
-	<artifactId>java-code-simple</artifactId>
+	<artifactId>java-sec-code-plus</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>java-code-simple</name>
+	<name>java-sec-code-plus</name>
 	<description>another Java API</description>
 	<properties>
 		<java.version>17</java.version>
@@ -19,7 +19,32 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-test-autoconfigure</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.33</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.32</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/net.sourceforge.pmd/pmd -->
