@@ -232,4 +232,6 @@ GET http://localhost:80/api/spel/bad01?cmd=vulnhere
 - **人工代码审计学习**
 </details>
 
+## 看到类似截图内容表明部署运行成功
+- 访问：http://localhost:8080/hi ,确认各个路由正常可用.
 ![image](https://github.com/user-attachments/assets/025d993a-59b1-420d-9c69-aa0617e18dfc)
