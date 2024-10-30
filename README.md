@@ -1,16 +1,14 @@
-## 项目介绍
-- 一个SpringBoot的脚手架，按照教程走下去直接部署到可运行状态.
-- A SpringBoot scaffolding for security education purposes.
-- 目标：
-  - 一站式安全能力评估.
+```markdown
+## 项目简介
+- 这是一个基于SpringBoot的安全教育脚手架，按照教程操作可以快速部署并运行。
+- **目标**：提供一站式的安全能力评估平台。
 
-## 以阿里云服务器部署为例
-- 按照下面教程部署，总共重新用时10分钟.
+## 部署指南（以阿里云服务器为例）
+- 按照以下步骤部署，预计耗时约10分钟。
 
-### LINUX下运行
-```
-## 下载基本环境和依赖:
-
+### LINUX环境下的操作
+```bash
+# 安装基础环境和依赖
 yum install git maven -y
 wget https://mirrors.estointernet.in/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
 tar -xvf apache-maven-3.6.3-bin.tar.gz
@@ -19,15 +17,13 @@ wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
 tar xf jdk-17_linux-x64_bin.tar.gz
 mv jdk-17.0.7/ /usr/lib/jvm
 
-
-## 更新配置
-
+# 更新配置
 rm -rf /opt/apache-maven-3.6.3/conf/settings.xml
 vi /opt/apache-maven-3.6.3/conf/settings.xml
-更新settings.xml源，参考settings这个标题
+# 参考“settings.xml”节配置源
 
 vi /etc/profile
-#set java environment(保存下面信息到/etc/profile末尾)
+# 设置Java和Maven环境
 export M2_HOME='/opt/apache-maven-3.6.3'
 export JAVA_HOME=/usr/lib/jvm/jdk-17.0.7
 export CLASSPATH=$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib
@@ -35,32 +31,25 @@ export PATH=$M2_HOME/bin:$JAVA_HOME/bin:$PATH
 
 source /etc/profile
 
-## 下载文件包
+# 下载项目文件
 git clone https://github.com/zgimszhd61/java-code-simple.git
 cd java-code-simple
 
-## 试编译运行:
+# 编译和运行
 mvn install
 mvn package
-
 ```
 
-### USAGE
-```
-
+### 启动应用
+```bash
 mvn spring-boot:run
-
 ```
 
-### 注意
-```
+### 注意事项
+- 默认监听8080端口，若使用阿里云，请在安全组中允许8080端口访问。
+- 若要使用80端口，请在 `pom.xml` 文件中调整配置。
 
-打开的是8080端口，如果用的是阿里云，需要注意安全组允许8080端口被访问
-如果想要启动的是80端口，那么pom.xml的配置需改一下
-
-```
-
-### settings.xml
+### settings.xml 配置示例
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
@@ -74,93 +63,64 @@ mvn spring-boot:run
      <name>阿里云公共仓库</name>
      <url>https://maven.aliyun.com/repository/public</url>
     </mirror>
-     <mirror>
-     <id>aliyunmaven</id>
-     <mirrorOf>*</mirrorOf>
-     <name>阿里云谷歌仓库</name>
-     <url>https://maven.aliyun.com/repository/google</url>
-    </mirror>
-    <mirror>
-     <id>aliyunmaven</id>
-     <mirrorOf>*</mirrorOf>
-     <name>阿里云阿帕奇仓库</name>
-     <url>https://maven.aliyun.com/repository/apache-snapshots</url>
-    </mirror>
-    <mirror>
-     <id>aliyunmaven</id>
-     <mirrorOf>*</mirrorOf>
-     <name>阿里云spring仓库</name>
-     <url>https://maven.aliyun.com/repository/spring</url>
-    </mirror>
-    <mirror>
-     <id>aliyunmaven</id>
-     <mirrorOf>*</mirrorOf>
-     <name>阿里云spring插件仓库</name>
-     <url>https://maven.aliyun.com/repository/spring-plugin</url>
-    </mirror>
-   </mirrors>
+    <!-- 其他阿里云仓库配置同理 -->
+  </mirrors>
 </settings>
 ```
 
 ## 如果80或8080端口被占用
+```bash
+# 查找占用进程并结束
+lsof -i:8080 
+kill -9 [PID]
 ```
 
-运行 lsof -i:8080 ， 得到PID进程号
-kill -9 PID进程号 ，杀掉进程
-然后重新运行
+## 漏洞验证接口
+- 下面是一些用于安全测试的API接口示例：
 
-```
-
-## 攻击验证API
-```agsl
-
-###
+```bash
+# XSS攻击测试
 GET http://localhost:80/api/xss/bad?name=<script>alert(1)</script>
 
-###
+# SSRF攻击测试
 GET http://localhost:80/api/ssrf/bad?url=http://localhost:80/api/xss/bad?name=<script>alert(1)</script>
 
-###
+# 远程代码执行测试
 GET http://localhost:80/api/rce/bad02?cmd=ls
 
-###
+# XXE攻击测试
 GET http://localhost:80/api/xxe/bad01?xml=<!DOCTYPE doc [<!ENTITY xxe SYSTEM \"http://127.0.0.1:1664\">]><doc>&xxe;</doc>
 
-###
+# JSONP攻击测试
 GET http://localhost:80/api/jsonp/bad01?callback=<script>alert(1)</script>
 
-###
+# SPEL攻击测试
 GET http://localhost:80/api/spel/bad01?cmd=vulnhere
-
-
 ```
 
 ## 应用场景
-- 安全防护产品测试.
-  - IDE插件能力测试.
-  - WAF能力测试.
-  - 白盒扫描能力测试.
-  - 黑盒扫描能力测试.
-  - IAST扫描能力测试.
-  - 供应链安全产品能力测试.
-- 人工代码审计学习.
-
+- **安全防护产品测试**：
+  - IDE插件测试
+  - WAF能力测试
+  - 白盒、黑盒、IAST扫描测试
+  - 供应链安全产品测试
+- **人工代码审计学习**
 
 ## 更新日志
-- 2023-06: 项目初始化，创建ssrf、rce、xss、Helloworld健康检查接口.创建README教程.
-- 2023-07-01: 增加反序列化，增加Ognl;
-- 2023-07-04: 增加bsh,groovy,mvel,processbuilder,redos,jndi；
+- **2023-06**：项目初始化，创建ssrf、rce、xss接口及健康检查。
+- **2023-07-01**：新增反序列化和Ognl。
+- **2023-07-04**：新增bsh、groovy、mvel、processbuilder、redos、jndi。
 
-
-## 如何加入共建
-- 联系wx:7908300 ，领取任务.
-- 或者直接本项目提出issue.
+## 参与共建
+- 联系微信：7908300 领取任务
+- 或直接在项目中提出issue。
 
 ## 下一步计划
-- [] 异常报错回显到页面.
-- [] 短信验证码无频率控制.
-- [] 账号之中邮箱和手机号信息可通过1+1+1枚举.
-- [] 开源许可证违规风险还原.
-- [] 常用高Star供应链CVE漏洞还原.
-- [] 不安全的加密算法（如静态盐salt).
-- [] 创建其他分支:AndroidApp常见漏洞benchmark,pythonApp常见漏洞benchmark,BunApp常见漏洞benchmark,IosApp常见漏洞Benchmark，并提供索引.
+- [ ] 异常信息回显至页面
+- [ ] 无频率限制的短信验证码
+- [ ] 邮箱和手机号信息的枚举攻击
+- [ ] 开源许可证风险模拟
+- [ ] 高星CVEs漏洞复现
+- [ ] 不安全的加密算法（如静态盐）
+- [ ] 创建其他分支：Android、Python、Bun、iOS等应用漏洞Benchmark
+```
