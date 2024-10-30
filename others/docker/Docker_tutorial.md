@@ -1,5 +1,3 @@
-我将帮您创建一个基于上述代码的Dockerfile和相关安装教程。
-
 ## Dockerfile内容
 ```dockerfile
 # 使用官方JDK 17镜像作为基础镜像
