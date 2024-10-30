@@ -200,7 +200,8 @@ lsof -i:8080
 kill -9 [PID]
 ```
 
-## 漏洞验证接口
+<details>
+  <summary>漏洞验证接口</summary>
 - 下面是一些用于安全测试的API接口示例：
 
 ```bash
@@ -222,6 +223,7 @@ GET http://localhost:80/api/jsonp/bad01?callback=<script>alert(1)</script>
 # SPEL攻击测试
 GET http://localhost:80/api/spel/bad01?cmd=vulnhere
 ```
+</details>
 
 ## 应用场景
 - **安全防护产品测试**：
