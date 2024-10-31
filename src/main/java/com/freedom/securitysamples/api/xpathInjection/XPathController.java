@@ -10,6 +10,12 @@ import org.w3c.dom.Document;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.util.List;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.io.InputStream;
+import java.io.ByteArrayInputStream;
+import java.util.Base64;
+import java.util.ServiceLoader;
 
 @RestController
 @RequestMapping("/api/xpath")
@@ -67,6 +73,49 @@ public class XPathController {
             return "{'error':'Invalid XPath expression'}";
         } catch (Exception e) {
             return "{'error':'Invalid XML content or parsing error'}";
+        }
+    }
+
+    // 使用URLClassLoader加载用户提供的数据流
+    @GetMapping("/loadWithURLClassLoader")
+    public String loadWithURLClassLoader(@RequestParam("data") String base64EncodedData) {
+        try {
+            // 将Base64编码的数据转换为字节数组
+            byte[] dataBytes = Base64.getDecoder().decode(base64EncodedData);
+            InputStream inputStream = new ByteArrayInputStream(dataBytes);
+
+            // 创建URL并使用URLClassLoader加载
+            URL[] urls = { new URL("file:") }; // 使用空的file URL作为示例
+            URLClassLoader urlClassLoader = new URLClassLoader(urls);
+
+            // 此处可以根据需要进一步处理数据流
+            return "{'result':'Data loaded successfully'}";
+        } catch (Exception e) {
+            return "{'error':'Failed to load data using URLClassLoader'}";
+        }
+    }
+
+    // 使用ServiceLoader加载用户指定的服务接口
+    @GetMapping("/loadWithServiceLoader")
+    public String loadWithServiceLoader(@RequestParam("serviceInterface") String serviceInterface) {
+        try {
+            // 使用外部输入加载服务接口，存在安全风险
+            Class<?> serviceClass = Class.forName(serviceInterface);
+            ServiceLoader<?> loader = ServiceLoader.load(serviceClass);
+
+            // 加载并返回服务信息
+            StringBuilder resultBuilder = new StringBuilder("{'services': [");
+            for (Object service : loader) {
+                resultBuilder.append("'" + service.getClass().getName() + "',");
+            }
+            if (resultBuilder.length() > 13) {
+                resultBuilder.setLength(resultBuilder.length() - 1); // 移除最后一个逗号
+            }
+            resultBuilder.append("]}");
+
+            return resultBuilder.toString();
+        } catch (Exception e) {
+            return "{'error':'Failed to load service using ServiceLoader'}";
         }
     }
 }
