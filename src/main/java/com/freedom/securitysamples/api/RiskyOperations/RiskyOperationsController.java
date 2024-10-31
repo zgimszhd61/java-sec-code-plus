@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import sun.misc.Unsafe;
+import java.rmi.Naming;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 
 import java.lang.reflect.Field;
 
@@ -87,6 +90,24 @@ public class RiskyOperationsController {
         return "{'status':'error','msg':'输入为空'}";
     }
 
+    @GetMapping("/rmi")
+    public String rmiInput(@RequestParam String input) {
+        try {
+            // 假设RMI服务已经在远程主机上注册，绑定名为"RemoteService"
+            RemoteService remoteService = (RemoteService) Naming.lookup("rmi://localhost:1099/RemoteService");
+            // 使用RMI远程调用服务
+            String response = remoteService.processInput(input);
+            return "RMI Response: " + response;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Error during RMI call: " + e.getMessage();
+        }
+    }
+
+    // 定义一个RMI服务的接口
+    public interface RemoteService extends Remote {
+        String processInput(String input) throws RemoteException;
+    }
     @GetMapping("/unsafe/cas")
     public String unsafeCompareAndSwap(@RequestParam(required = false) Long address, @RequestParam(required = false) Integer expected, @RequestParam(required = false) Integer newValue) {
         // 使用 Unsafe 进行不正确的 Compare-And-Swap 操作，可能导致数据不一致
