@@ -13,11 +13,6 @@ import java.time.format.DateTimeParseException;
 @RestController
 public class BigDecimalInputController {
 
-    @GetMapping("/greet")
-    public String greet() {
-        return "Hello, welcome to the new feature!";
-    }
-
     @GetMapping("/bigdecimal")
     public String handleBigDecimal(@RequestParam String userInput) {
         try {
