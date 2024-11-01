@@ -1,4 +1,4 @@
-package com.freedom.securitysamples.javanewfeature.notaboutSafe;
+package com.freedom.securitysamples.newfea.notaboutsafe;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
