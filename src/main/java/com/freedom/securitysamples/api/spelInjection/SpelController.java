@@ -8,7 +8,9 @@ import org.springframework.expression.spel.support.SimpleEvaluationContext;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import jakarta.el.ELProcessor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -100,6 +102,18 @@ public class SpelController {
         context.setRootObject(contextMap);
         Expression parsedExpression = expressionParser.parseExpression("cmd.toString()");
         return parsedExpression.getValue(context).toString(); // 危险
+    }
+
+    @GetMapping("/el-dangerous-example")
+    public String elDangerousExample(@RequestParam String userInput) {
+        ELProcessor elProcessor = new ELProcessor();
+        String result;
+        try {
+            result = (String) elProcessor.eval(userInput);
+        } catch (Exception e) {
+            result = "Error evaluating expression: " + e.getMessage();
+        }
+        return "EL Dangerous example result: " + result;
     }
 
     @GetMapping("/spel/bad12")
